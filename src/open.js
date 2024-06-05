@@ -4,11 +4,12 @@ function addCommand(program, programOptions) {
 
   program
     .command('open')
-    .description('Open the agenda folder.')
+    .option('-e, --editor <editor>')
+    .description('Open the agenda folder.') 
     .action(async (options) => {
 
-      console.log(`Open agenda`)
-      child_process.spawn('code', [programOptions.agendaEntriesDir], {
+      console.log(`Opening agenda`)
+      child_process.spawn(options.editor || "$EDITOR", [programOptions.agendaEntriesDir], {
         stdio: 'inherit'
       });
     })
